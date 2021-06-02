@@ -59,7 +59,8 @@ const getFilesList = (req, res) => {
 const downloadFiles = (req, res) => {
     const fileName = req.params.name;
     const filePath = path.join(__dirname, '../public/uploads/');
-  
+
+    //download the file
     res.download(filePath + fileName, (err) => {
       if (err) {
         res.status(500).send({
@@ -67,6 +68,11 @@ const downloadFiles = (req, res) => {
         });
       }
     });
+
+    //stream the file
+    /*const file = fs.createReadStream(filePath+fileName);
+    //console.log(file);
+    file.pipe(res); */
 };
 
 module.exports = { uploadFile, downloadFiles, getFilesList };
